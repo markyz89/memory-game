@@ -2,6 +2,30 @@
  * Create a list that holds all of your cards
  */
 
+var listItems = document.getElementsByClassName("card");
+
+
+// console.log(listItems);
+
+var arrListItems = Array.prototype.slice.call(listItems);
+// console.log(arrListItems);
+
+var shuffledArray = shuffle(arrListItems);
+console.log(shuffledArray);
+
+
+var newList = '';
+for (i=0; i<shuffledArray.length; i++) {
+	newList += shuffledArray[i].outerHTML;
+}
+
+function shuffleCards () {
+	document.getElementById("deck").innerHTML = newList;
+}
+
+// shuffleCards(); - might be easier to work  with unshuffled cards for other parts
+
+
 
 /*
  * Display the cards on the page
