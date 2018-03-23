@@ -116,7 +116,7 @@ h1 {
 /*Modal styles*/
 
 #success-modal {
-/*display: none;*/
+display: none;
 }
 
 .modal {
@@ -131,13 +131,13 @@ background-color: rgba(0,0,0,0.2);
 
 }
 
-.modal-style {
+.modal-content {
      background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */ 
      padding: 1% 5% 5% 5%;
  }
 
-.modal-content {
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+.modal-style {
+    background: linear-gradient(160deg, #aa7ecd 0%, #02ccba 100%);
     margin: 10% auto;
     width: 30%;
     padding: 3% 3% 3% 3%;
@@ -170,6 +170,10 @@ border-radius: 8px;
  color: #fff;
  font-size: 18px;
  font-family: 'Coda', cursive;
+}
+
+#button-restart:hover, #button-restart:focus {
+    cursor: pointer;
 }
 
 

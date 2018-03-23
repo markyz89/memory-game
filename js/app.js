@@ -81,13 +81,24 @@ var matchingCards;
 // to get cards currently showing that do not match and are to be hidden
 var displayedCards;
 
+// to access all cards in restart function
+var allCards = document.getElementsByClassName('card');
+
+//modal that appears on completing the game
 var successModal = document.getElementById('success-modal');
 
+// button that allows modal to be closed
 var closeModalButton = document.getElementsByClassName('close-button')[0];
 
+// button on modal that restarts game
+var playAgainButton = document.getElementById('button-restart');
+
+// button above game board, always present, always listening, allowing restart
+var restartButton = document.getElementsByClassName("restart")[0];
 
 
-
+// have restart button active throughout session
+restartButton.addEventListener('click', restartGame);
 
 
 
@@ -224,14 +235,20 @@ function checkIfWon () {
 		successModal.style.display='block';
 		document.getElementById('success-message').textContent = "You win! You completed the game in "+moveCount+" moves!";
 		closeModal();
+		playAgain();
 
 	}
+}
+
+
+function playAgain () {
+	playAgainButton.addEventListener('click', restartGame);
 }
 
 //closing modal functions
 function closeModal () {
 	closeModalButton.addEventListener('click', function () {
-		document.getElementById('success-modal').style.display = 'none';
+		successModal.style.display = 'none';
 	});	
 	window.addEventListener('click', windowCloseModal);
 }
@@ -240,4 +257,24 @@ function windowCloseModal (e) {
 	if (e.target == successModal) {
 		successModal.style.display = 'none';
 	}
+}
+
+function restartGame () {
+	// loop all cards and set class to not-shown
+	for (let i = 0; i< allCards.length; i++) {
+			allCards[i].className = "card not-shown";
+			}
+
+	// make sure everything is reset
+	shuffleCards();
+	moveCount = 0;
+	document.getElementById("moves-made").innerHTML = moveCount;
+	openCards = [];
+	matchedCards = [];
+	matchingCards = '';
+	displayedCards = '';
+
+	// make sure modal is not displaying
+	successModal.style.display = 'none';
+
 }
