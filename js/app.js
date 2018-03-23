@@ -81,11 +81,22 @@ var matchingCards;
 // to get cards currently showing that do not match and are to be hidden
 var displayedCards;
 
+var successModal = document.getElementById('success-modal');
+
+var closeModalButton = document.getElementsByClassName('close-button')[0];
+
+
+
+
+
+
+
+
 
 // Game logic and listeners
 //start with shuffle
 
-shuffleCards();
+// shuffleCards();
 
 //click event
 	document.body.addEventListener('click', function(e) {
@@ -209,6 +220,24 @@ function addOpenCard (e) {
 
 function checkIfWon () {
 	if (matchedCount === 8) {
-		alert("You win! You completed the game in "+moveCount+" moves!");
+		// alert("You win! You completed the game in "+moveCount+" moves!");
+		successModal.style.display='block';
+		document.getElementById('success-message').textContent = "You win! You completed the game in "+moveCount+" moves!";
+		closeModal();
+
+	}
+}
+
+//closing modal functions
+function closeModal () {
+	closeModalButton.addEventListener('click', function () {
+		document.getElementById('success-modal').style.display = 'none';
+	});	
+	window.addEventListener('click', windowCloseModal);
+}
+
+function windowCloseModal (e) {
+	if (e.target == successModal) {
+		successModal.style.display = 'none';
 	}
 }
