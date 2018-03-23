@@ -107,3 +107,7 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+#deck .red-wrong {
+    background-color: red;
+}
