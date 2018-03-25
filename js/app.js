@@ -111,10 +111,14 @@ restartButton.addEventListener('click', restartGame);
 
 //click event
 	document.body.addEventListener('click', function(e) {
+		
 		// if it is a card that was clicked
 		// and a card that isnt being shown
 	if (e.target.classList.contains("not-shown")) {	
-																			
+		if (document.querySelectorAll('.not-shown').length == 16 && moveCount === 0) {
+			runTimer();
+		}
+		
 		console.log("card was clicked!");
 		// this allows class name of clicked to be compared against array 
 		let classMatch = e.target.querySelector('i').className;
@@ -175,7 +179,12 @@ restartButton.addEventListener('click', restartGame);
 
 function updateMoveCount () {
 	moveCount += 1;
-	document.getElementById("moves-made").innerHTML = moveCount;
+	if (moveCount === 1) {
+		document.getElementById("moves-made").innerHTML =moveCount+" Move";
+	} else {
+		document.getElementById("moves-made").innerHTML =moveCount+" Moves";
+	}
+	
 	console.log(moveCount);
 }
 
@@ -232,10 +241,11 @@ function addOpenCard (e) {
 function checkIfWon () {
 	if (matchedCount === 8) {
 		// alert("You win! You completed the game in "+moveCount+" moves!");
+		stopTimer();
 		successModal.style.display='block';
-		document.getElementById('success-message').textContent = "You win! You completed the game in "+moveCount+" moves!";
+		document.getElementById('success-message').textContent = "You win! You completed the game in "+moveCount+" moves in a time of "+completedTime+"!";
 		closeModal();
-		playAgain();
+		
 
 	}
 }
@@ -243,6 +253,7 @@ function checkIfWon () {
 
 function playAgain () {
 	playAgainButton.addEventListener('click', restartGame);
+	displayTimer.textContent = "0:00";
 }
 
 //closing modal functions
@@ -251,6 +262,7 @@ function closeModal () {
 		successModal.style.display = 'none';
 	});	
 	window.addEventListener('click', windowCloseModal);
+	playAgain();
 }
 
 function windowCloseModal (e) {
@@ -276,5 +288,63 @@ function restartGame () {
 
 	// make sure modal is not displaying
 	successModal.style.display = 'none';
+	stopTimer();
+	displayTimer.textContent = "0:00";
+	// Reset move count
+	document.getElementById("moves-made").innerHTML =moveCount+" Moves";
 
 }
+
+
+//timer
+const displayTimer = document.querySelector('#timer');
+let clock;
+
+var timerStart;
+var timeNow;
+var timerEnd;
+
+var secondsElapsed;
+var minutesElapsed;
+var secondsRounded;
+var secondsFormatted;
+var timeElapsed;
+
+var completedTime;
+
+var clickToRun;
+// runTimerOnFirstClick();
+
+
+function runTimer() {
+	timerStart = Date.now();
+	clock = setInterval(function() {
+	displayTime(clock);
+	}, 1000)
+
+	//remove it
+	document.removeEventListener('click', runTimer);
+}
+
+
+function stopTimer() {
+
+	clearInterval(clock);
+	completedTime = document.querySelector('#timer').textContent;
+
+	console.log(completedTime);
+}
+
+function displayTime(clock) {
+	timeNow = Date.now();
+	secondsElapsed = (timeNow - timerStart) / 1000;
+	minutesElapsed = Math.floor(secondsElapsed / 60);
+	// seconds that take number of minutes into account
+	secondsRounded = Math.floor(secondsElapsed % 60);
+	secondsFormatted = secondsRounded < 10 ? '0'+secondsRounded: secondsRounded;
+	timeElapsed = minutesElapsed+":"+secondsFormatted;
+	displayTimer.textContent = timeElapsed;
+	console.log(timeElapsed);
+}
+
+
