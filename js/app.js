@@ -13,7 +13,7 @@ var arrListItems = Array.prototype.slice.call(listItems);
 // console.log(arrListItems);
 
 var shuffledArray = shuffle(arrListItems);
-console.log(shuffledArray);
+// console.log(shuffledArray);
 
 
 var newList = '';
@@ -114,39 +114,25 @@ restartButton.addEventListener('click', restartGame);
 		
 		// if it is a card that was clicked
 		// and a card that isnt being shown
-	if (e.target.classList.contains("not-shown")) {	
+	if (e.target.classList.contains("not-shown") && (document.querySelectorAll('.show').length < 2)) {	
 		if (document.querySelectorAll('.not-shown').length == 16 && moveCount === 0) {
 			runTimer();
 		}
 		
-		console.log("card was clicked!");
+		// console.log("card was clicked!");
 		// this allows class name of clicked to be compared against array 
-		let classMatch = e.target.querySelector('i').className;
-																			
-			// turns off event listeners while two unmatched cards are showing (so no more can be clicked)
-			// actually an error that accomplises desired outcome anyway...not ideal
-			if (document.querySelectorAll('.show').length == 2) {	
-				console.log("not listening!");		
-				document.getElementsByClassName('.card').removeEventListener('click', function(){
-					
-				})
-				
-			} else {
-				console.log("still listening");
-			}
-	
-			
+		let classMatch = e.target.querySelector('i').className;																	
 
 		
 			if (openCards.length < 1) {  // no open cards - first card opened
-				console.log("nothing in the array!");
+				// console.log("nothing in the array!");
 				//shows the card
 				revealCard(e);
 				//adds to the open card array
 				addOpenCard(e);
 				
 			} else {  // openCards has something in it, so this card is being compared against the first card that was opened.
-				console.log("there is something in the array");
+				// console.log("there is something in the array");
 					if (openCards.includes(classMatch)) {
 						// only for console logging
 						matchedCards.push(classMatch);
@@ -185,7 +171,7 @@ function updateMoveCount () {
 		document.getElementById("moves-made").innerHTML =moveCount+" Moves";
 	}
 	
-	console.log(moveCount);
+	// console.log(moveCount);
 }
 
 
@@ -332,7 +318,7 @@ function stopTimer() {
 	clearInterval(clock);
 	completedTime = document.querySelector('#timer').textContent;
 
-	console.log(completedTime);
+	// console.log(completedTime);
 }
 
 function displayTime(clock) {
@@ -344,7 +330,7 @@ function displayTime(clock) {
 	secondsFormatted = secondsRounded < 10 ? '0'+secondsRounded: secondsRounded;
 	timeElapsed = minutesElapsed+":"+secondsFormatted;
 	displayTimer.textContent = timeElapsed;
-	console.log(timeElapsed);
+	// console.log(timeElapsed);
 }
 
 
