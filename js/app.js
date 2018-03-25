@@ -170,6 +170,8 @@ function updateMoveCount () {
 	} else {
 		document.getElementById("moves-made").innerHTML =moveCount+" Moves";
 	}
+
+	adjustStars();
 	
 	// console.log(moveCount);
 }
@@ -333,4 +335,26 @@ function displayTime(clock) {
 	// console.log(timeElapsed);
 }
 
+var starRating = document.getElementsByClassName('stars')[0];
 
+function adjustStars () {
+	if (moveCount > 12) {
+		starRating.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
+	}
+	if (moveCount > 18) {
+		starRating.innerHTML = "<li><i class='fa fa-star'></i></li>";
+	}
+	if (moveCount > 25) {
+		starRating.innerHTML = "<li><i class='fa fa-star-half'></i></li>";
+	}
+
+	if(moveCount > 27) {
+		starRating.innerHTML = "<li><i>...</i></li>";
+	}
+}
+
+
+// star rating system
+
+// thresholds for moves 12 18 and 25 
+// simple if statement after move adjustment function
