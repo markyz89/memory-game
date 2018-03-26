@@ -70,16 +70,36 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    transition: background 0.4s;
+}
+
+.not-shown {
+    transform: rotateX(0) rotateY(0);
+}
+
+.not-shown:hover{
+    background: #02b3e4;
+    transform: scale(1.1);
+    transition: all 0.4s ease-in;
+    transform: rotateX(179deg) rotateY(179deg);   
 }
 
 .deck .card.show {
     font-size: 33px;
+
+    transition: all 1s;
+
 }
+
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    transition: background 0.8s;
+    transform: skewX(180deg);
+
+
 }
 
 #deck .red-wrong {

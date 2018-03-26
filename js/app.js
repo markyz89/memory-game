@@ -109,6 +109,7 @@ restartButton.addEventListener('click', restartGame);
 
 // shuffleCards();
 
+
 //click event
 	document.body.addEventListener('click', function(e) {
 		
