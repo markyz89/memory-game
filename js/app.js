@@ -4,19 +4,19 @@
 
 
 
-var listItems = document.getElementsByClassName("card");
+const listItems = document.getElementsByClassName("card");
 
 
 // console.log(listItems);
 
-var arrListItems = Array.prototype.slice.call(listItems);
+const arrListItems = Array.prototype.slice.call(listItems);
 // console.log(arrListItems);
 
-var shuffledArray = shuffle(arrListItems);
+const shuffledArray = shuffle(arrListItems);
 // console.log(shuffledArray);
 
 
-var newList = '';
+let newList = '';
 for (i=0; i<shuffledArray.length; i++) {
 	newList += shuffledArray[i].outerHTML;
 }
@@ -69,32 +69,32 @@ function shuffle(array) {
 
 
 // max two cards, will be removed straight away. Cards currently revealed but not matched
-var openCards = [];
+let openCards = [];
 // this only remains useful for console logging.
-var matchedCards = [];
+let matchedCards = [];
 //this informs when the game is won
-var matchedCount = 0;
+let matchedCount = 0;
 // number of moves player has made - counts when cards are matched and when they are hidden
-var moveCount = 0;
+let moveCount = 0;
 // to get cards currently showing that are to be matched
-var matchingCards;
+let matchingCards;
 // to get cards currently showing that do not match and are to be hidden
-var displayedCards;
+let displayedCards;
 
 // to access all cards in restart function
-var allCards = document.getElementsByClassName('card');
+const allCards = document.getElementsByClassName('card');
 
 //modal that appears on completing the game
-var successModal = document.getElementById('success-modal');
+const successModal = document.getElementById('success-modal');
 
 // button that allows modal to be closed
-var closeModalButton = document.getElementsByClassName('close-button')[0];
+const closeModalButton = document.getElementsByClassName('close-button')[0];
 
 // button on modal that restarts game
-var playAgainButton = document.getElementById('button-restart');
+const playAgainButton = document.getElementById('button-restart');
 
 // button above game board, always present, always listening, allowing restart
-var restartButton = document.getElementsByClassName("restart")[0];
+const restartButton = document.getElementsByClassName("restart")[0];
 
 
 // have restart button active throughout session
@@ -107,7 +107,7 @@ restartButton.addEventListener('click', restartGame);
 // Game logic and listeners
 //start with shuffle
 
-// shuffleCards();
+shuffleCards();
 
 
 //click event
@@ -289,19 +289,19 @@ function restartGame () {
 const displayTimer = document.querySelector('#timer');
 let clock;
 
-var timerStart;
-var timeNow;
-var timerEnd;
+let timerStart;
+let timeNow;
+let timerEnd;
 
-var secondsElapsed;
-var minutesElapsed;
-var secondsRounded;
-var secondsFormatted;
-var timeElapsed;
+let secondsElapsed;
+let minutesElapsed;
+let secondsRounded;
+let secondsFormatted;
+let timeElapsed;
 
-var completedTime;
+let completedTime;
 
-var clickToRun;
+let clickToRun;
 // runTimerOnFirstClick();
 
 
@@ -336,7 +336,7 @@ function displayTime(clock) {
 	// console.log(timeElapsed);
 }
 
-var starRating = document.getElementsByClassName('stars')[0];
+const starRating = document.getElementsByClassName('stars')[0];
 
 function adjustStars () {
 	if (moveCount > 12) {
