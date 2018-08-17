@@ -12,21 +12,22 @@ const listItems = document.getElementsByClassName("card");
 const arrListItems = Array.prototype.slice.call(listItems);
 // console.log(arrListItems);
 
-const shuffledArray = shuffle(arrListItems);
+
+
+function shuffleCards () {
+	const shuffledArray = shuffle(arrListItems);
 // console.log(shuffledArray);
 
 
-let newList = '';
-for (i=0; i<shuffledArray.length; i++) {
-	newList += shuffledArray[i].outerHTML;
-}
+	let newList = '';
+	for (i=0; i<shuffledArray.length; i++) {
+		newList += shuffledArray[i].outerHTML;
+	}
 
-function shuffleCards () {
 	document.getElementById("deck").innerHTML = newList;
+	console.log('shuffleCards function ran');
+	// checking this runs
 }
-
-// shuffleCards(); - might be easier to work  with unshuffled cards for other parts
-
 
 
 /*
@@ -51,8 +52,11 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
+    console.log('shuffle function ran');
+    // checking this part is also running
 
     return array;
+    
 }
 
 
@@ -232,12 +236,25 @@ function checkIfWon () {
 		// alert("You win! You completed the game in "+moveCount+" moves!");
 		stopTimer();
 		successModal.style.display='block';
-		document.getElementById('success-message').textContent = "You win! You completed the game in "+moveCount+" moves in a time of "+completedTime+"!";
+		document.getElementById('success-message').innerHTML = "You win! You completed the game in "+moveCount+" moves in a time of "+completedTime+"!";
+	if (moveCount > 0 && moveCount < 13) {
+		document.getElementById('star-rating-message').innerHTML = "<i class='fa fa-star'><i class='fa fa-star'><i class='fa fa-star'>";
+	}
+	if (moveCount > 13 && moveCount < 19) {
+	document.getElementById('star-rating-message').innerHTML = "<i class='fa fa-star'><i class='fa fa-star'>";
+	}
+	if (moveCount > 19 && moveCount < 26) {
+	document.getElementById('star-rating-message').innerHTML = "<i class='fa fa-star'>";
+	}
+
+	if(moveCount > 26) {
+		document.getElementById('star-rating-message').innerHTML = "...no stars. Try and complete in less moves next time.";
+	}
+}
 		closeModal();
 		
 
 	}
-}
 
 
 function playAgain () {
@@ -261,19 +278,22 @@ function windowCloseModal (e) {
 }
 
 function restartGame () {
+	shuffleCards();
+
 	// loop all cards and set class to not-shown
 	for (let i = 0; i< allCards.length; i++) {
 			allCards[i].className = "card not-shown";
 			}
 
 	// make sure everything is reset
-	shuffleCards();
+	
 	moveCount = 0;
 	document.getElementById("moves-made").innerHTML = moveCount;
 	openCards = [];
 	matchedCards = [];
 	matchingCards = '';
 	displayedCards = '';
+	adjustStars();
 
 	// make sure modal is not displaying
 	successModal.style.display = 'none';
@@ -339,23 +359,20 @@ function displayTime(clock) {
 const starRating = document.getElementsByClassName('stars')[0];
 
 function adjustStars () {
+	if (moveCount < 13) {
+		starRating.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
+	}
+
 	if (moveCount > 12) {
 		starRating.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
 	}
 	if (moveCount > 18) {
 		starRating.innerHTML = "<li><i class='fa fa-star'></i></li>";
-	}
-	if (moveCount > 25) {
-		starRating.innerHTML = "<li><i class='fa fa-star-half'></i></li>";
-	}
-
-	if(moveCount > 27) {
-		starRating.innerHTML = "<li><i>...</i></li>";
-	}
+	}	
 }
 
 
 // star rating system
 
-// thresholds for moves 12 18 and 25 
+// thresholds for moves 12 and 18
 // simple if statement after move adjustment function

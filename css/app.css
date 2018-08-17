@@ -52,8 +52,8 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+/*    height: 125px;*/
+    width: 20%;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -64,6 +64,14 @@ h1 {
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     margin: 1% 1%;
+}
+
+    .deck .card:after {
+    content:'';
+/*    float:left;*/
+    padding-top:100%;
+
+
 }
 
 .deck .card.open {
@@ -77,13 +85,15 @@ h1 {
     transform: rotateX(0) rotateY(0);
 }
 
-.not-shown:hover{
+@media (hover: hover) {
+    .not-shown:hover{
     background: #02b3e4;
     transform: scale(1.1);
-    transition: all 0.4s ease-in;
-    transform: rotateX(180deg) rotateY(180deg);
-      
+    transition: all 0.05s;
+    transform: rotateX(180deg) rotateY(180deg);    
+    }
 }
+
 
 .deck .card.show {
     font-size: 33px;
@@ -212,27 +222,32 @@ border-radius: 8px;
 }
 
 
-/*background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);*/
 
 /*media queries*/
 
-@media only screen and (max-width: 1120px) {
-    .deck .card {
-        width: 100px;
-        height: 100px;
-    }
-}
-
-@media only screen and (max-width: 923px) {
-    .deck .card {
-        width: 80px;
-        height: 80px;
-    }
-}
 
 @media only screen and (max-width: 767px) {
-    .deck .card {
-        width: 125px;
-        height: 125px;
+    .deck {
+        min-height: 500px;
+    }
+
+    .deck .card.show, .deck .card.match {
+        font-size: 25px; 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .deck {
+        min-height: 350px;
+    }
+
+     .deck .card.show, .deck .card.match {
+        font-size: 18px; 
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .deck {
+        min-height: 300px;
     }
 }
